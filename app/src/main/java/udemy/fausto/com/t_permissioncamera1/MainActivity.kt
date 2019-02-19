@@ -105,15 +105,24 @@ class MainActivity : AppCompatActivity() {
             for (i in permissions.indices) {
                 if (grantResults[i] == PackageManager.PERMISSION_DENIED){
                     allSuccess = false
-                    var requestAgain = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        shouldShowRequestPermissionRationale(permissions[i])
+
+                    var requestAgain = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && shouldShowRequestPermissionRationale(permissions[i])
+
+                    if (requestAgain) {
+                        Toast.makeText(context, "Permission denied", Toast.LENGTH_LONG).show()
                     } else {
-                        TODO("VERSION.SDK_INT < M")
+
+                        Toast.makeText(context, "Go to setting and enable the permission", Toast.LENGTH_LONG).show()
                     }
+
                 }
 
 
             }
+            if (allSuccess) {
+                Toast.makeText(context, "Permission granted you can press buttons", Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 
