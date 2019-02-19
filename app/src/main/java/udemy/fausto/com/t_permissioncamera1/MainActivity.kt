@@ -1,5 +1,7 @@
 package udemy.fausto.com.t_permissioncamera1
 
+// https://www.youtube.com/watch?v=MG8KtxaCKJ8
+
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -90,6 +92,15 @@ class MainActivity : AppCompatActivity() {
 
     // se usa este método propio más fácil de usar que el de Android (parecido a los parámetros del requestPermission : Boolean
     fun checkPermission(context: Context, permissionArray: Array<String>) : Boolean{
+        var allSuccess = true
+
+        for (i in permissionArray.indices) {
+            if (checkCallingOrSelfPermission(permissionArray[i]) == PackageManager.PERMISSION_DENIED)
+                allSuccess = false
+        }
+        return allSuccess
+
+
 
 
         return  false
